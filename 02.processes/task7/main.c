@@ -18,7 +18,8 @@ int main (int argc, char* argv[])
 	if (fork() > 0) {
 	wait(&status);
          printf("father\n");
-         fd1=open(argv[1],O_RDWR);
+         //fd1=open(argv[1],O_RDWR);
+         lseek(fd1,0,SEEK_SET);
  	while ( read(fd1, &c, 2) ){
               write(1,&c,2); 
                //printf("%s",c);
@@ -28,7 +29,7 @@ int main (int argc, char* argv[])
 		
 			printf("son\n");
                         write(fd1,"foobar",6);
-                        close(fd1);	
+                       // close(fd1);	
 	}
 close(fd1);
 exit(0);
