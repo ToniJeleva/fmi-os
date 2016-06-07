@@ -1,0 +1,22 @@
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main (int argc, char* argv[])
+{
+	int status;
+        int fd1;
+        if ( (fd1 = open(argv[1], O_CREAT | O_RDWR,0777)) == -1 ){
+                        write(2, "Operation open failed!", 27);
+                        exit(1);
+                }
+
+	if (fork() > 0) {
+		wait(&status);
+                write(1,"parent");
+               
+	}else{
+           write(fd1,"foobar");
+        }	
+exit(0);
+}
